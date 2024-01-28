@@ -1,0 +1,51 @@
+﻿@model X.PagedList.IPagedList<Settlements.Models.SettlementModel>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc;
+@using X.PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewData["Title"] = "רשימת התנחלויות";
+}
+
+<h1>רשימת ישובים</h1>
+
+<p>
+    <a asp-action="Create">צור חדש</a>
+</p>
+<form asp-controller="Settlements" asp-action="Index" method="get">
+    <p>
+        <input type="submit" value="חפש" class="btn btn-primary" />
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        :שם היישוב מכיל
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("שם היישוב", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">לערוך</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">למחוק</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
+<p>@Model.PageCount עמוד @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) מתוך </p>
+
+@Html.PagedListPager((IPagedList)ViewBag.onePageOfSettlements, 
+                     page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                     )

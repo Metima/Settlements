@@ -1,0 +1,27 @@
+﻿@model Settlements.Models.SettlementModel
+
+@{
+    ViewData["Title"] = "מְחִיקָה";
+}
+
+<h2>מחיקה</h2>
+
+<h3>?האם אתה בטוח שברצונך למחוק את זה</h3>
+<div>
+    <h4>ישוב</h4>
+    <hr />
+    <dl class="row">
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+            &nbsp;:
+            @Html.DisplayFor(model => model.Name)
+        </dt>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="מחק" class="btn btn-danger" />&nbsp;|&nbsp;
+        <a asp-action="Index">לחזור לרשימת ישובים</a>
+    </form>
+</div>
