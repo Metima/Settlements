@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+table, tr, td {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    height: 1em;
+}
+
+tr:nth-child(even) {
+    background: silver;
+}

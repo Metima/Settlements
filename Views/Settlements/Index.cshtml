@@ -2,50 +2,77 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Mvc;
 @using X.PagedList;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@using X.PagedList.Mvc.Core.Fluent;
 
 @{
-    ViewData["Title"] = "רשימת התנחלויות";
+    ViewData["Title"] = "ישובים";
 }
 
-<h1>רשימת ישובים</h1>
+<div>
+    <h4 style="direction: rtl; color: #3d86bc;margin-right: 70px;float:left;margin-left:35%;">ממשק אדמין</h4>
+    <h4 style="direction: rtl; color: #3d86bc;margin-right: 70px;float:right;">ישובים</h4>
+</div>
 
-<p>
-    <a asp-action="Create">צור חדש</a>
-</p>
-<form asp-controller="Settlements" asp-action="Index" method="get">
-    <p>
-        <input type="submit" value="חפש" class="btn btn-primary" />
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        :שם היישוב מכיל
-    </p>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.ActionLink("שם היישוב", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">לערוך</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">למחוק</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-<br />
-<p>@Model.PageCount עמוד @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) מתוך </p>
+    <form name="filter" asp-controller="Settlements" asp-action="Index" method="get" style="direction: rtl;">
+    <table class="table" style="direction: rtl;">
+        <thead>
+            <tr style="background-color: #444444;vertical-align: middle;">
+                <th style="width:60%;">
+                    <span>
+                        <a asp-action="Index" asp-route-sortOrder="@ViewBag.NameSortParam" asp-route-currentFilter="@ViewBag.CurrentFilter" asp-route-page="@Model.PageNumber" style="text-decoration:none;color:white;">
+                            שם היישוב
+                        </a>
+                    </span>
+                </th>
+                <th style="width:20%;">
+                    <a asp-action="Create" style="text-decoration:none;">
+                        <span style="display: inline-block;background-image: url('/css/CrossGray.png');background-position: center;width: 32px;height: 32px;margin-right: 15px;"></span>
+                    </a>
+                </th>
+                <th style="width:20%;border-top-left-radius: 10px; border-bottom-left-radius: 10px;"></th>
+            </tr>
+            <tr style="background-color: white;vertical-align: middle;">
+                <th>
+                    <span>
+                        <input class="input-validation-error" style="border-radius:10px;width: 80%;" id="SearchString" name="SearchString" type="text" value="@ViewBag.CurrentFilter">
+                    </span>
+                </th>
+                <th style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+                    <span style="display: inline-block;background-image: url('/css/mglass.png');background-position: center;width: 32px;height: 32px;cursor:pointer;" onclick="filter.submit()"></span>
+                    <span style="display: inline-block;background-image: url('/css/CrossBlue.png');background-position: center;width: 32px;height: 32px;cursor:pointer;" onclick="document.getElementById('SearchString').value = ''; filter.submit()"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration:none;">
+                            <span style="display: inline-block;background-image: url('/css/Edit.png');background-position: center;width: 32px;height: 32px;"></span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none;">
+                            <span style="display: inline-block;background-image: url('/css/Delete.png');background-position: center;width: 32px;height: 32px;"></span>
+                        </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    </form>
+    <div style="float:left;direction:ltr;margin-top:-25px;">
+        <span style="float:left;font-weight:bold;margin-top:5px;">Pages</span>
+        <span style="float:left;margin-left:5px;">
+        @Html.PagedListPager((IPagedList)ViewBag.onePageOfSettlements, 
+                         page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                                                              
+                         )
+        </span>
+        <span style="float:left;font-weight:bold;margin-left:5px;margin-top:5px;">@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+    </div>
 
-@Html.PagedListPager((IPagedList)ViewBag.onePageOfSettlements, 
-                     page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
-                     )
+
+
+

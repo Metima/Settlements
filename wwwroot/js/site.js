@@ -2,3 +2,4 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css", "~/Content/PagedList.css"));

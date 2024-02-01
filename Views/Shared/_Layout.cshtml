@@ -6,31 +6,42 @@
     <title>@ViewData["Title"] - ישובים</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PagedList.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Settlements.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Settlements" asp-action="Index">ישובים</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body style="background-color: #c4d6f6;padding:10px;">
+    <div style="float:left;">
+        <span style="display: inline-block;background-image: url('/css/Men.png');background-position: center;width: 22px;height: 22px;margin-left:-10px;margin-top:-20px;"></span>
+    </div>
+    <div>
+        <div style="background-color: white;border-top-left-radius:20px;border-top-right-radius:20px;max-width:100%;margin-left:10px;margin-top:15px;">
+            <div style="background-color: white;padding:10px;border-top-right-radius:20px;border-top-left-radius:20px;direction:rtl;height: 100px;">
+                <div style="float:right;">
+                    <span style="display: inline-block;background-image: url('/css/Menu.png');background-position: center;width: 70px;height: 70px;"></span>
+                </div>
+                <div style="background-color: #128dff;width:45%;height:80px;vertical-align:middle;border-radius:20px;float:right;margin-right:10px;padding-top:10px;box-shadow: 2px 2px 5px #6c757d;">
+                    <a asp-action="Index" style="text-decoration:none;">
+                        <span style="display: inline-block;background-image: url('/css/Clients.png');background-position: center;width: 125px;height: 60px;margin-right:10%;float:right;"></span>
+                    </a>
+                    <a asp-action="Index" style="text-decoration:none;">
+                        <span style="display: inline-block;background-image: url('/css/Graph.png');background-position: center;width: 125px;height: 60px;margin-right:10%;float:right;"></span>
+                    </a>
+                    <a asp-action="Index" style="text-decoration:none;">
+                        <span style="display: inline-block;background-image: url('/css/Exit.png');background-position: center;width: 125px;height: 60px;margin-left:10%;float:left;"></span>
+                    </a>
+                </div>
+                <div style="float:left;">
+                    <span style="display: inline-block;background-image: url('/css/Logo.png');background-position: center;width: 140px;height: 85px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="background-color: white;max-width:99.3%;float: initial;margin-left:10px;">
+            <main role="main" class="pb-3" >
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - <a asp-area="" asp-controller="Settlements" asp-action="Index">ישובים</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -46,3 +46,15 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.icon {
+    display: inline-block;
+    background-image: url('/css/CrossGray.png');
+}
+
+.icon-search {
+    background-position: 0 0;
+    width: 32px;
+    height: 32px;
+}
+
